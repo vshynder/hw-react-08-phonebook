@@ -62,10 +62,7 @@ const ContactListItem = ({ contactId, name, number, remove }) => (
       onClick={() => {
         remove(contactId);
       }}
-    >
-      {/* <div className="contact-list__x-left"></div>
-      <div className="contact-list__x-right"></div> */}
-    </button>
+    ></button>
   </li>
 );
 
