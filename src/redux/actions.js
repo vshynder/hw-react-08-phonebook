@@ -12,6 +12,10 @@ const logOutRequest = createAction("logOut/request");
 const logOutSuccess = createAction("logOut/success");
 const logOutError = createAction("logOut/error");
 
+const getCurrentUserRequest = createAction("getCurrentUser/request");
+const getCurrentUserSuccess = createAction("getCurrentUser/success");
+const getCurrentUserError = createAction("getCurrentUser/error");
+
 const fetchContactsRequest = createAction("fetchContacts/request");
 const fetchContactsSuccess = createAction("fetchContacts/success");
 const fetchContactsError = createAction("fetchContacts/error");
@@ -70,6 +74,10 @@ export default {
   logOutRequest,
   logOutSuccess,
   logOutError,
+
+  getCurrentUserRequest,
+  getCurrentUserSuccess,
+  getCurrentUserError,
 
   fetchContactsRequest,
   fetchContactsSuccess,

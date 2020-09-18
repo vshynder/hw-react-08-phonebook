@@ -8,32 +8,16 @@ import Loader from "../components/Loading";
 import { CSSTransition } from "react-transition-group";
 
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 import operations from "../redux/operations/contactsOperations";
 import selectors from "../redux/contacts-selectors";
 import actions from "../redux/actions";
 
 const Contacts = (props) => {
-  const history = useHistory();
   useEffect(() => {
-    if (!props.userName) {
-      history.replace("/login");
-      return;
-    }
-
     props.loadContacts();
-    props.toggleMounted(true);
     // eslint-disable-next-line
   }, []);
-
-  useEffect(() => {
-    if (!props.userName) {
-      history.replace("/login");
-      return;
-    }
-    // eslint-disable-next-line
-  }, [props.userName]);
 
   const handleSubmit = ({ name, number }) => {
     if (name.trim() === "" || number.trim() === "") {

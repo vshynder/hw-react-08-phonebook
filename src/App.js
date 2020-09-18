@@ -2,30 +2,41 @@ import React from "react";
 
 import NavBar from "./components/NavBar";
 
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
 
-import Contacts from "./screens/ContactsPage";
-import RegisterPage from "./screens/RegisterPage";
-import LoginPage from "./screens/LoginPage";
+import { connect } from "react-redux";
+import operations from "./redux/operations/authOperations";
+
+import ContactsView from "./views/ContactsPageView";
+import RegisterPageView from "./views/RegisterPageView";
+import LoginPageView from "./views/LoginPageView";
 
 import "./app.scss";
 
 class App extends React.Component {
+  componentDidMount() {
+    this.props.onGetCurrentUser();
+  }
+
   render() {
     return (
       <BrowserRouter>
         <NavBar />
         <Switch>
-          <Route path="/contacts">
-            <Contacts />
-          </Route>
-          <Route path="/register">
-            <RegisterPage />
-          </Route>
-          <Route path="/login">
-            <LoginPage />
-          </Route>
-          <Route path="/">
+          <PrivateRoute path="/contacts" component={ContactsView} />
+          <PublicRoute
+            restricted={true}
+            path="/register"
+            component={RegisterPageView}
+          />
+          <PublicRoute
+            restricted={true}
+            path="/login"
+            component={LoginPageView}
+          />
+          <Route path="/" exact>
             <Redirect to="/login" />
           </Route>
         </Switch>
@@ -34,4 +45,8 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  onGetCurrentUser: () => dispatch(operations.getCurrentUser()),
+});
+
+export default connect(null, mapDispatchToProps)(App);

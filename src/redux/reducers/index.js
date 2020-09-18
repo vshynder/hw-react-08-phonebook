@@ -7,6 +7,17 @@ import { alertShownReducer } from "./alertShownReducer";
 import { alertMessageReducer } from "./alertMessageReducer";
 import { authReducer } from "./authReducers";
 
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+const persistConfig = {
+  key: "user",
+  storage,
+  whitelist: ["token"],
+};
+
+const persistedReducer = persistReducer(persistConfig, authReducer);
+
 const rootReducer = combineReducers({
   contacts: contactReducer,
   filter: filterReducer,
@@ -14,7 +25,7 @@ const rootReducer = combineReducers({
   isAlertShown: alertShownReducer,
   alertMessage: alertMessageReducer,
   isLoading: loading,
-  user: authReducer,
+  user: persistedReducer,
 });
 
 export default rootReducer;

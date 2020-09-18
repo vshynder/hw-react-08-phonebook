@@ -15,4 +15,9 @@ export const authReducer = createReducer(initialState, {
     token: action.payload.token,
   }),
   [actions.logOutSuccess]: () => ({ name: null, email: null, token: null }),
+  [actions.getCurrentUserSuccess]: (state, action) => ({
+    name: action.payload.data.name,
+    email: action.payload.data.email,
+    token: action.payload.persistedToken,
+  }),
 });

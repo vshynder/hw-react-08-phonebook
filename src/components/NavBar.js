@@ -18,7 +18,7 @@ function Navbar(props) {
       <NavLink className="navbar__link" to="/contacts">
         <span className="navbar__var"> Contacts</span>
       </NavLink>
-      {props.userName && <UserMenu name={props.userName} />}
+      ){props.userName && <UserMenu name={props.userName} />}
     </div>
   );
 }
